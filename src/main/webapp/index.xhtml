@@ -10,11 +10,11 @@
 
     <ui:define name="implementation">
       <h:form>
-        <p:growl id="growl" life="2000" />
+        <p:growl id="growl" life="4000" />
 
         <p:toolbar>
           <f:facet name="left">
-            <p:commandButton icon="fa fa-cogs" value="Ejecutar" update="growl" actionListener="#{groovyBean.execute}" ajax="false"/>
+            <p:commandButton id="btEjecutar" icon="fa fa-cogs" value="Ejecutar" update="resultado" actionListener="#{groovyBean.execute}"/>
           </f:facet>
         </p:toolbar>
 
@@ -23,9 +23,16 @@
         </p:panel>
 
         <p:panel id="resultado" header="Resultado">
-          <h:outputText id="display" value="#{groovyBean.result}"/>
+
+          <h:panelGrid columns="2" cellpadding="5">
+            <h:outputLabel for="tipo" value="Tipo:" />
+            <h:outputText id="tipo" value="#{groovyBean.tipoResultado}"/>
+            <h:outputLabel for="result" value="Resultado:" />
+            <h:outputText id="result" value="#{groovyBean.result}"/>
+          </h:panelGrid>
         </p:panel>
 
     </h:form>
+
   </ui:define>
 </ui:composition>

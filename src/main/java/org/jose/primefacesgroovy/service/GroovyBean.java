@@ -15,6 +15,7 @@ public class GroovyBean {
 
   private String text;
   private String result;
+  private Object value;
 
   public void setText(String text) {
     this.text = text;
@@ -32,6 +33,14 @@ public class GroovyBean {
     return(this.result);
   }
 
+  public String getTipoResultado() {
+    if(this.value != null) {
+      return(this.value.getClass().toString());
+    }
+    else {
+      return(null);
+    }
+  }
   public void execute( ) {
     runWithGroovyScriptEngine();
   }
@@ -43,9 +52,9 @@ public class GroovyBean {
       binding.setVariable("foo", new Integer(2));
       GroovyShell shell = new GroovyShell(binding);
 
-      Object value = shell.evaluate(this.text);
+      value = shell.evaluate(this.text);
 
-      this.result = value.getClass().getName() + value.toString();
+      this.result = value.toString();
     }
     catch (Exception err) {
       this.result = err.toString();
