@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      lang="en">
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+        <title>PrimeFaces - Groovy</title>
+
+        <ui:insert name="head"/>
+    </h:head>
+
+    <h:body>
+      <div class="layout-wrapper">
+            <div class="layout-content">
+              <ui:insert name="content">
+                  <div class="content-section content-submenu">
+                      <ui:insert name="submenu"></ui:insert>
+                  </div>
+                  <div class="content-section content-introduction">
+                      <h1><ui:insert name="title"></ui:insert></h1>
+                      <p><ui:insert name="description"></ui:insert></p>
+                  </div>
+                  <div class="content-section content-implementation">
+                      <ui:insert name="implementation"></ui:insert>
+                  </div>
+                  <div class="content-section content-source">
+                      <ui:insert name="source"></ui:insert>
+                  </div>
+              </ui:insert>
+            </div>
+      </div>
+    </h:body>
+
+</html>
