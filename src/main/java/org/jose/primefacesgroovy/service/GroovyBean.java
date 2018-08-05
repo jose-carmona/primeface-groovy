@@ -8,21 +8,32 @@ import javax.faces.event.ActionEvent;
 import groovy.lang.Binding;
 import groovy.lang.GroovyShell;
 
+import org.commonmark.node.Node;
+import org.commonmark.parser.Parser;
+import org.commonmark.renderer.html.HtmlRenderer;
+
+import org.jose.primefacesgroovy.util.CodeVisitor;
 
 @ManagedBean(name = "groovyBean")
 @ApplicationScoped
 public class GroovyBean {
 
-  private String text;
+  private String markdown;
+  private String groovyScript;
   private String result;
-  private Object value;
+  private String html;
 
-  public void setText(String text) {
-    this.text = text;
+
+  public String getHtml() {
+    return(this.html);
   }
 
-  public String getText() {
-    return(this.text);
+  public void setMarkdown(String markdown) {
+    this.markdown = markdown;
+  }
+
+  public String getMarkdown() {
+    return(this.markdown);
   }
 
   public void setResult(String result) {
@@ -33,17 +44,23 @@ public class GroovyBean {
     return(this.result);
   }
 
-  public String getTipoResultado() {
-    if(this.value != null) {
-      return(this.value.getClass().toString());
-    }
-    else {
-      return(null);
-    }
-  }
   public void execute( ) {
+    transformMarkdown();
     runWithGroovyScriptEngine();
   }
+
+  public void transformMarkdown() {
+    Parser parser = Parser.builder().build();
+    Node document = parser.parse(this.markdown);
+
+    CodeVisitor visitor = new CodeVisitor();
+    document.accept(visitor);
+    this.groovyScript = new String(visitor.code);
+
+    HtmlRenderer renderer = HtmlRenderer.builder().build();
+    this.html = renderer.render(document);
+  }
+
 
   public void runWithGroovyScriptEngine() {
 
@@ -52,9 +69,9 @@ public class GroovyBean {
       binding.setVariable("foo", new Integer(2));
       GroovyShell shell = new GroovyShell(binding);
 
-      value = shell.evaluate(this.text);
+      Object value = shell.evaluate(this.groovyScript);
 
-      this.result = value.toString();
+      this.result = value.getClass().getName() + value.toString();
     }
     catch (Exception err) {
       this.result = err.toString();

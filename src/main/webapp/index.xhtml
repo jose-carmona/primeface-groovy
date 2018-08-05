@@ -10,29 +10,33 @@
 
     <ui:define name="implementation">
       <h:form>
-        <p:growl id="growl" life="4000" />
+        <p:growl id="growl" life="2000" />
 
         <p:toolbar>
           <f:facet name="left">
-            <p:commandButton id="btEjecutar" icon="fa fa-cogs" value="Ejecutar" update="resultado" actionListener="#{groovyBean.execute}"/>
+            <p:commandButton icon="fa fa-cogs" value="Ejecutar" update="growl" actionListener="#{groovyBean.execute}" ajax="false"/>
           </f:facet>
         </p:toolbar>
 
-        <p:panel id="script" header="Script en Groovy">
-          <p:inputTextarea rows="10" cols="100" required="true" value="#{groovyBean.text}"/>
-        </p:panel>
+        <p:tabView>
+          <p:tab title="Script">
+            <p:panel id="script" header="Script en Groovy">
+              <p:inputTextarea rows="10" cols="100" required="true" value="#{groovyBean.markdown}"/>
+            </p:panel>
+          </p:tab>
+          <p:tab title="Markdown">
+            <p:panel id="markdown" header="Resultado Markdown">
+              <h:outputText id="displayMarkdown" value="#{groovyBean.html}" escape="false" />
+            </p:panel>
+          </p:tab>
+          <p:tab title="Resultado">
+            <p:panel id="resultado" header="Resultado del Script">
+              <h:outputText id="displayResultado" value="#{groovyBean.result}"/>
+            </p:panel>
+          </p:tab>
+        </p:tabView>
 
-        <p:panel id="resultado" header="Resultado">
-
-          <h:panelGrid columns="2" cellpadding="5">
-            <h:outputLabel for="tipo" value="Tipo:" />
-            <h:outputText id="tipo" value="#{groovyBean.tipoResultado}"/>
-            <h:outputLabel for="result" value="Resultado:" />
-            <h:outputText id="result" value="#{groovyBean.result}"/>
-          </h:panelGrid>
-        </p:panel>
 
     </h:form>
-
   </ui:define>
 </ui:composition>
