@@ -21,21 +21,34 @@
 
         <p:toolbar>
           <f:facet name="left">
-            <p:commandButton icon="fa fa-cogs" value="Ejecutar" update="growl" actionListener="#{groovyBean.execute}" ajax="false"/>
+            <p:commandButton icon="fa fa-file" value="Cargar" update="view" actionListener="#{groovyBean.load}" />
+            <p:commandButton icon="fa fa-play" value="Comprobar" update="growl" actionListener="#{groovyBean.execute}" ajax="false"/>
           </f:facet>
         </p:toolbar>
 
-        <p:tabView>
-          <p:tab title="Edición">
-            <p:panel id="script" header="Edición Script en Groovy">
-              <p:inputTextarea rows="10" cols="100" required="true" value="#{groovyBean.markdown}"/>
-            </p:panel>
-          </p:tab>
+        <p:tabView id="view">
+
           <p:tab title="Markdown">
-            <p:panel id="markdown" header="Resultado Markdown">
+            <p:panel id="markdown" header="Regla de Cálculo">
               <h:outputText id="displayMarkdown" value="#{groovyBean.html}" escape="false" />
             </p:panel>
           </p:tab>
+
+          <p:tab title="Edición">
+            <p:panel id="script" header="Edición">
+              <p:inputTextarea
+                required="true"
+                rows="30" cols="100" autoResize="false"
+                value="#{groovyBean.markdown}"
+                requiredMessage="No hay nada que ejecutar: el script está vacio"/>
+            </p:panel>
+          </p:tab>
+
+          <p:tab title="Test">
+            <p:panel id="test" header="Datos de Test">
+            </p:panel>
+          </p:tab>
+
           <p:tab title="Script">
             <p:panel id="groovyScript" header="script en groovy">
               <pre><code class="groovy">
@@ -43,11 +56,13 @@
               </code></pre>
             </p:panel>
           </p:tab>
+
           <p:tab title="Resultado">
-            <p:panel id="resultado" header="Resultado del Script">
+            <p:panel id="resultado" header="Resultado">
               <h:outputText id="displayResultado" value="#{groovyBean.result}"/>
             </p:panel>
           </p:tab>
+
         </p:tabView>
 
 

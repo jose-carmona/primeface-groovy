@@ -1,7 +1,13 @@
 package org.jose.primefacesgroovy.service;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.io.PrintWriter;
+import java.util.Scanner;
+
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.event.ActionEvent;
 
@@ -15,7 +21,7 @@ import org.commonmark.renderer.html.HtmlRenderer;
 import org.jose.primefacesgroovy.util.CodeVisitor;
 
 @ManagedBean(name = "groovyBean")
-@ApplicationScoped
+@ViewScoped
 public class GroovyBean {
 
   private String markdown;
@@ -52,6 +58,12 @@ public class GroovyBean {
     runWithGroovyScriptEngine();
   }
 
+  public void load( ) {
+    this.markdown = getFile("calculo");
+    transformMarkdown();
+    runWithGroovyScriptEngine();
+  }
+
   public void transformMarkdown() {
     Parser parser = Parser.builder().build();
     Node document = parser.parse(this.markdown);
@@ -79,6 +91,30 @@ public class GroovyBean {
     catch (Exception err) {
       this.result = err.toString();
     }
+
+  }
+
+  private String getFile(String fileName) {
+
+    StringBuilder result = new StringBuilder("");
+
+    ClassLoader classLoader = getClass().getClassLoader();
+    File file = new File(classLoader.getResource("/groovy/" + fileName + ".md").getFile());
+
+    try (Scanner scanner = new Scanner(file)) {
+
+      while (scanner.hasNextLine()) {
+        String line = scanner.nextLine();
+        result.append(line).append("\n");
+      }
+
+      scanner.close();
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    return result.toString();
 
   }
 
