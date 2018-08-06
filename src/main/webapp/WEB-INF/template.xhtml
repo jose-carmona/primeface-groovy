@@ -19,7 +19,9 @@
     </h:head>
 
     <h:body>
-      <div class="layout-topbar">
+      <ui:insert name="scripts"/>
+
+      <div class="layout-topbar navbar navbar-expand-lg navbar-light bg-light">
         <h:link class="logo-container" outcome="/index.xhtml">
           <p:graphicImage name="images/jose-carmona.png" width="50px" library="jose" />
         </h:link>

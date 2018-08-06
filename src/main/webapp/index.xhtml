@@ -5,8 +5,15 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="/WEB-INF/template.xhtml">
 
-    <ui:define name="title">Groovy</ui:define>
-    <ui:define name="description">Ejecución de un script en groovy</ui:define>
+    <ui:define name="head">
+      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"/>
+    </ui:define>
+
+    <ui:define name="scripts">
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/groovy.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script>
+    </ui:define>
 
     <ui:define name="implementation">
       <h:form>
@@ -19,14 +26,21 @@
         </p:toolbar>
 
         <p:tabView>
-          <p:tab title="Script">
-            <p:panel id="script" header="Script en Groovy">
+          <p:tab title="Edición">
+            <p:panel id="script" header="Edición Script en Groovy">
               <p:inputTextarea rows="10" cols="100" required="true" value="#{groovyBean.markdown}"/>
             </p:panel>
           </p:tab>
           <p:tab title="Markdown">
             <p:panel id="markdown" header="Resultado Markdown">
               <h:outputText id="displayMarkdown" value="#{groovyBean.html}" escape="false" />
+            </p:panel>
+          </p:tab>
+          <p:tab title="Script">
+            <p:panel id="groovyScript" header="script en groovy">
+              <pre><code class="groovy">
+                <h:outputText id="displayGroovyScript" value="#{groovyBean.groovyScript}" escape="false" />
+              </code></pre>
             </p:panel>
           </p:tab>
           <p:tab title="Resultado">

@@ -1,2 +1,2 @@
 # primeface-groovy
-Ejecución de un script groggy embebido en una aplicación jee (primefaces)
+Ejecución de un script groovy embebido en una aplicación jee (primefaces)

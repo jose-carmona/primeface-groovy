@@ -23,6 +23,9 @@ public class GroovyBean {
   private String result;
   private String html;
 
+  public String getGroovyScript() {
+    return(this.groovyScript);
+  }
 
   public String getHtml() {
     return(this.html);
