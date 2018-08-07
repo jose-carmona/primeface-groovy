@@ -1,4 +1,4 @@
-```groovy
+```
 // TODO: mover Objeto a java
 class Objeto {
   Map datos
@@ -45,32 +45,33 @@ class Concepto {
   }
 }
 ```
+# Ordenanza Fiscal reguladora de las tasas por la utilización privativa o el aprovechamiento especial del dominio público local
 
-# Epígrafe cuarto
+## Epígrafe cuarto
 
 Ocupación de terrenos del dominio público municipal con mercancías, materiales de
 construcción, escombros, vallas, puntales, asnillas, andamios, grúas, elevadores
 y otras instalaciones análogas:
 
-### Datos necesarios para el cálculo:
+### Datos necesarios para el cálculo en el Objeto Tributario:
 
-* Concepto.mercancias.m2
-* Concepto.mercancias.dias
-* Concepto.materiales.m2
-* Concepto.materiales.días
-* Concepto.corteTrafico.horas
-* Concierto.identificacion
-* Concierto.contenedores.número
-* Concierto.pasteras.número
+* ```mercancias.m2```
+* ```mercancias.dias```
+* ```materiales.m2```
+* ```materiales.días```
+* ```corteTrafico.horas```
+* ```concierto.identificacion```
+* ```concierto.contenedores.nm```
+* ```concierto.pasteras.nm```
 
-## Comprobaciones
+### Comprobaciones sobre datos del Objeto Tributario
 ```groovy
 // La ordenanza no preve mas de un año de ocupación
 assert objeto.datos["mercancias.dias"] < 365 : "La ordenanza no preve más de un año de ocupación"
 assert objeto.datos["materiales.dias"] < 365 : "La ordenanza no preve más de un año de ocupación"
 ```
 
-## Limpieza
+### Normalización de datos del Objeto Tributario
 
 ```
 // Si se posee concierto, no se aplican los conceptos 1, 2 y 3
@@ -78,11 +79,10 @@ assert objeto.datos["materiales.dias"] < 365 : "La ordenanza no preve más de un
 
 ## Conceptos
 
-1. Con mercancías, **materiales**, o productos de la industria y comercio, comprendidos
-los vagones metálicos conocidos como contenedores, por m2 o fracción y día:
-0,135.
+1. Con mercancías, materiales, o productos de la industria y comercio, comprendidos
+los vagones metálicos conocidos como contenedores, por m2 o fracción y día: ```t["mercancias"]```
 
-```groovy
+```
 def importes = [
   new Concepto(
     nombre: "mercancias",
@@ -93,10 +93,9 @@ def importes = [
 
 2. Con materiales de construcción, vallas, puntales, asnillas, andamios, grúas,
 elevadores, escombros, materiales de construcción, vagones para recogida o depósito
-de los mismos y otros aprovechamientos análogos, por m2 o fracción al día:
-0,135.
+de los mismos y otros aprovechamientos análogos, por m2 o fracción al día: ```t["materiales"]```
 
-```groovy
+```
 importes.add(
   new Concepto(
     nombre: "materiales",
@@ -116,10 +115,9 @@ mercancías o materiales de construcción:
  * Hasta doce meses: 351,76.
 
 4. Por corte de calles al tráfico con motivo de ocupación de la vía pública por
-alguno de los conceptos incluidos en este epígrafe, por hora o fracción:
-12,28.
+alguno de los conceptos incluidos en este epígrafe, por hora o fracción: ```t["corteTrafico"]```
 
-```groovy
+```
 ​importes.add(
   new Concepto(
     nombre: "corteTrafico",
@@ -141,21 +139,18 @@ b) Los titulares de la ocupación deberán ingresar el importe de la liquidaci
 c) Los conciertos versarán sobre la superficie ocupada o sobre el tiempo medio de
    ocupación. En el supuesto de ocupación de la vía pública con contenedores para
    recogida de escombros, el concierto versará sobre el número de contenedores que
-   de media se entiendan utilizados durante el año, a razón de ...
+   de media se entiendan utilizados durante el año, a razón de ```t["conciertoContenedores"]```
+   por cada contenedor, que se reduce a ```t["conciertoPasteras"]``` en el caso
+   de las pasteras, sin que le sea acumulable la tarifa de los apartados 1 y 2 de
+   este epígrafe.
 
-```groovy
+```
+importes.conciertoContenedores = concierto.contenedores.numero * Tarifa(conciertoContenedores)
 importes.conciertoContenedores = concierto.contenedores.numero * Tarifa(conciertoContenedores)
 ```
-   ... por cada contenedor, que se reduce a ...
-
-```groovy
-importes.conciertoContenedores = concierto.contenedores.numero * Tarifa(conciertoContenedores)
-```
-   ... en el caso de las pasteras, sin que le sea acumulable la tarifa de los
-   apartados 1 y 2 de este epígrafe.
 
 ## Total Liquidación
 
-```groovy
+```
 resultado.setPrincipal(importes.sum().importe)
 ```
