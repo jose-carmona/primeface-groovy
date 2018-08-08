@@ -1,0 +1,79 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="head">
+      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"/>
+    </ui:define>
+
+    <ui:define name="scripts">
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/groovy.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script>
+    </ui:define>
+
+    <ui:define name="title">
+      Reglas de Cálculo
+    </ui:define>
+
+    <ui:define name="description">
+      Edición de reglas de Cálculo de Impuestos, Tasa...
+    </ui:define>
+
+    <ui:define name="body">
+      <h:form>
+        <p:growl id="growl" life="2000" />
+
+        <p:toolbar>
+          <f:facet name="left">
+            <p:commandButton icon="fa fa-file" value="Cargar" update="view" actionListener="#{groovyBean.load}" />
+            <p:commandButton icon="fa fa-play" value="Comprobar" update="growl" actionListener="#{groovyBean.execute}" ajax="false"/>
+          </f:facet>
+        </p:toolbar>
+
+        <p:tabView id="view">
+
+          <p:tab title="Markdown">
+            <p:panel id="markdown" header="Regla de Cálculo">
+              <h:outputText id="displayMarkdown" value="#{groovyBean.html}" escape="false" />
+            </p:panel>
+          </p:tab>
+
+          <p:tab title="Edición">
+            <p:panel id="script" header="Edición">
+              <p:inputTextarea
+                required="true"
+                rows="30" cols="100"
+                value="#{groovyBean.markdown}"
+                requiredMessage="No hay nada que ejecutar: el script está vacio"/>
+            </p:panel>
+          </p:tab>
+
+          <p:tab title="Test">
+            <p:panel id="test" header="Datos de Test">
+            </p:panel>
+          </p:tab>
+
+          <p:tab title="Script">
+            <p:panel id="groovyScript" header="script en groovy">
+              <pre><code class="groovy">
+                <h:outputText id="displayGroovyScript" value="#{groovyBean.groovyScript}" escape="false" />
+              </code></pre>
+            </p:panel>
+          </p:tab>
+
+          <p:tab title="Resultado">
+            <p:panel id="resultado" header="Resultado">
+              <h:outputText id="displayResultado" value="#{groovyBean.result}"/>
+            </p:panel>
+          </p:tab>
+
+        </p:tabView>
+
+
+    </h:form>
+  </ui:define>
+</ui:composition>

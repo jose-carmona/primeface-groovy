@@ -5,7 +5,7 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="/WEB-INF/template.xhtml">
 
-    <ui:define name="content">
+    <ui:define name="body">
         <div class="layout-error">
             <div class="layout-error-message-box">
                 <span class="layout-error-name">Error Occured</span>
@@ -13,7 +13,7 @@
                 Message: #{pfExceptionHandler.message} <br/>
 StackTrace: <h:outputText value="#{pfExceptionHandler.formattedStackTrace}" escape="false" /> <br />
 
-                <p:button outcome="/index" type="button" value="Go to Homepage" class="secondary"/>
+                <p:button outcome="/" type="button" value="Go to Homepage" class="secondary"/>
             </div>
         </div>
     </ui:define>

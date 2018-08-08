@@ -1,5 +1,6 @@
 package org.jose.primefacesgroovy.service;
 
+import java.io.Serializable;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
@@ -7,7 +8,7 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.event.ActionEvent;
 
@@ -21,8 +22,8 @@ import org.commonmark.renderer.html.HtmlRenderer;
 import org.jose.primefacesgroovy.util.CodeVisitor;
 
 @ManagedBean(name = "groovyBean")
-@ViewScoped
-public class GroovyBean {
+@SessionScoped
+public class GroovyBean implements Serializable {
 
   private String markdown;
   private String groovyScript;
