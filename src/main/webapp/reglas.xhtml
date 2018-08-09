@@ -1,0 +1,41 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/main.xhtml">
+
+    <ui:define name="title">
+      Reglas de Cálculo
+    </ui:define>
+
+    <ui:define name="description">
+      Entidad Prueba
+    </ui:define>
+
+    <ui:define name="content">
+      <h:form>
+        <p:growl id="growl" life="2000" />
+
+        <p:dataTable id="singleDT" var="reglas" value="#{dtReglasView.reglas}" selectionMode="single" selection="#{dtSelectionView.selectedCar}" rowKey="#{reglas.id}">
+
+            <f:facet name="header">
+              Reglas de Cálculo
+            </f:facet>
+
+            <p:column headerText="Exacción">
+                <h:outputText value="#{reglas.exaccion}" />
+            </p:column>
+
+            <p:column headerText="Modelo">
+                <h:outputText value="#{reglas.modelo}" />
+            </p:column>
+
+            <p:column headerText="Regla Cálculo">
+                <h:outputText value="#{reglas.reglaCalculo}" />
+            </p:column>
+        </p:dataTable>
+
+      </h:form>
+    </ui:define>
+</ui:composition>

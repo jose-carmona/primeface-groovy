@@ -1,6 +1,6 @@
 # primeface-groovy
 
-Ejecución de un script groovy embebido en una aplicación jee (primefaces)
+Ejecución de un script groovy embebido markdown desde una aplicación jee (primefaces)
 
 ### Usamos
 
