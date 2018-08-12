@@ -1,0 +1,21 @@
+reglasUsadas:
+  Ejemplo1:
+    id: '1'
+    exaccion: Exa1
+    modelo: Modelo1
+    reglaCalculo: regla1
+  Ejemplo2:
+    id: '2'
+    exaccion: Exa2
+    modelo: Modelo2
+    reglaCalculo: calculo
+  Ejemplo3:
+    id: '3'
+    exaccion: Exa3
+    modelo: Modelo3
+    reglaCalculo: regla1
+  Ejemplo4:
+    id: '4'
+    exaccion: Exa4
+    modelo: Modelo4
+    reglaCalculo: calculo

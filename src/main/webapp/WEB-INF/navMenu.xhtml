@@ -5,16 +5,19 @@
 
   <ul class="navbar-nav mr-auto">
 
-    <li class="nav-item active">
-      <p:link outcome="/index" class="nav-link">
-        Inicio
-      </p:link>
-    </li>
-
-    <li class="nav-item active" >
-      <p:link outcome="/rc" class="nav-link">
-        Reglas de Cálculo
-      </p:link>
+    <li class="nav-item active dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Menú
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <p:link outcome="/index" class="dropdown-item" >
+          Inicio
+        </p:link>
+        <div class="dropdown-divider"></div>
+        <p:link outcome="/reglas" class="dropdown-item">
+          Reglas de Cálculo
+        </p:link>
+      </div>
     </li>
 
   </ul>

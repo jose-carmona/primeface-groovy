@@ -17,10 +17,19 @@
       <h:form>
         <p:growl id="growl" life="2000" />
 
-        <p:dataTable id="singleDT" var="reglas" value="#{dtReglasView.reglas}" selectionMode="single" selection="#{dtSelectionView.selectedCar}" rowKey="#{reglas.id}">
+        <p:dataTable id="singleDT" var="reglas" value="#{dtReglasView.reglas}"
+            paginator="true" paginatorPosition="top"
+            paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink}"
+            selectionMode="single" selection="#{dtReglasView.selected}" rowKey="#{reglas.id}">
 
             <f:facet name="header">
               Reglas de Cálculo
+            </f:facet>
+
+            <f:facet name="paginatorTopRight">
+                <p:commandButton action="#{dtReglasView.edit}" icon="fa fa-edit">
+                  <f:param name="query" value = "#{dtReglasView.selected.reglaCalculo}" />
+                </p:commandButton>
             </f:facet>
 
             <p:column headerText="Exacción">

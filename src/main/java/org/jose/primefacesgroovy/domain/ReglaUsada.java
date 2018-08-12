@@ -7,13 +7,6 @@ public class ReglaUsada {
   private String modelo;
   private String reglaCalculo;
 
-  public ReglaUsada(String id, String exaccion, String modelo, String reglaCalculo) {
-    this.id = id;
-    this.exaccion = exaccion;
-    this.modelo = modelo;
-    this.reglaCalculo = reglaCalculo;
-  }
-
   public String getId() {
     return this.id;
   }

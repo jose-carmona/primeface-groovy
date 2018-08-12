@@ -15,12 +15,17 @@
       <script>hljs.initHighlightingOnLoad();</script>
     </ui:define>
 
+    <f:metadata>
+        <f:viewParam id="query" name="query" value="#{groovyBean.query}" />
+        <f:viewAction action="#{groovyBean.load}" />
+    </f:metadata>
+
     <ui:define name="title">
       Reglas de Cálculo
     </ui:define>
 
     <ui:define name="description">
-      Edición de reglas de Cálculo de Impuestos, Tasa... 
+      Edición de reglas de Cálculo de Impuestos, Tasa...
     </ui:define>
 
     <ui:define name="content">

@@ -40,4 +40,9 @@ public class ReglasView implements Serializable {
     public void setService(ReglasService service) {
         this.service = service;
     }
+
+    public String edit() {
+      return "rc??faces-redirect=true&query=" + this.sel.getReglaCalculo();
+    }
+
 }

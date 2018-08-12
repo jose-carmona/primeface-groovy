@@ -8,7 +8,7 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.event.ActionEvent;
 
@@ -22,9 +22,10 @@ import org.commonmark.renderer.html.HtmlRenderer;
 import org.jose.primefacesgroovy.util.CodeVisitor;
 
 @ManagedBean(name = "groovyBean")
-@SessionScoped
+@RequestScoped
 public class GroovyBean implements Serializable {
 
+  private String query;
   private String markdown;
   private String groovyScript;
   private String result;
@@ -46,6 +47,14 @@ public class GroovyBean implements Serializable {
     return(this.markdown);
   }
 
+  public String getQuery() {
+    return(this.query);
+  }
+
+  public void setQuery(String query) {
+    this.query = query;
+  }
+
   public void setResult(String result) {
     this.result = result;
   }
@@ -60,9 +69,8 @@ public class GroovyBean implements Serializable {
   }
 
   public void load( ) {
-    this.markdown = getFile("calculo");
+    this.markdown = getFile(this.query);
     transformMarkdown();
-    runWithGroovyScriptEngine();
   }
 
   public void transformMarkdown() {
