@@ -20,6 +20,7 @@ import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.HtmlRenderer;
 
 import org.jose.primefacesgroovy.util.CodeVisitor;
+import org.jose.primefacesgroovy.domain.Resultado;
 
 @ManagedBean(name = "groovyBean")
 @RequestScoped
@@ -30,6 +31,8 @@ public class GroovyBean implements Serializable {
   private String groovyScript;
   private String result;
   private String html;
+
+  private Resultado resultado;
 
   public String getGroovyScript() {
     return(this.groovyScript);
@@ -89,13 +92,15 @@ public class GroovyBean implements Serializable {
   public void runWithGroovyScriptEngine() {
 
     try {
+      this.resultado = new Resultado();
+      
       Binding binding = new Binding();
-      binding.setVariable("foo", new Integer(2));
+      binding.setVariable("resultado", this.resultado);
       GroovyShell shell = new GroovyShell(binding);
 
       Object value = shell.evaluate(this.groovyScript);
 
-      this.result = value.getClass().getName() + value.toString();
+      this.result = resultado.toString();
     }
     catch (Exception err) {
       this.result = err.toString();

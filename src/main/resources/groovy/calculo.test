@@ -1,0 +1,4 @@
+when().
+  objeto( datos: [ "mercancias.m2" : 20] ) ).
+then().
+  resultado(principal(equal(100))

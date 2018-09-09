@@ -118,7 +118,9 @@ mercancías o materiales de construcción:
 alguno de los conceptos incluidos en este epígrafe, por hora o fracción: ```t["corteTrafico"]```
 
 ```
-​importes.add(
+resultado.addConcepto( "corteTrafico",objeto.datos["corteTrafico.horas"] * tarifa.conceptos["corteTrafico"] )
+​
+importes.add(
   new Concepto(
     nombre: "corteTrafico",
     importe: objeto.datos["corteTrafico.horas"] * tarifa.conceptos["corteTrafico"]
@@ -145,8 +147,8 @@ c) Los conciertos versarán sobre la superficie ocupada o sobre el tiempo medio
    este epígrafe.
 
 ```
-importes.conciertoContenedores = concierto.contenedores.numero * Tarifa(conciertoContenedores)
-importes.conciertoContenedores = concierto.contenedores.numero * Tarifa(conciertoContenedores)
+// importes.conciertoContenedores = concierto.contenedores.numero * Tarifa(conciertoContenedores)
+// importes.conciertoContenedores = concierto.contenedores.numero * Tarifa(conciertoContenedores)
 ```
 
 ## Total Liquidación
